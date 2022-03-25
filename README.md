@@ -24,8 +24,8 @@ timezones will be loaded on demand when they are accessed for the first time.
 Add a Gradle dependency:
 
 ```groovy
-implementation "org.threeten:threetenbp:1.4.0:no-tzdb"
-implementation "com.github.usefulness:lazythreetenbp:version"
+implementation "org.threeten:threetenbp:1.6.0:no-tzdb"
+implementation "com.github.usefulness:lazythreetenbp:${version}"
 ```
 
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].

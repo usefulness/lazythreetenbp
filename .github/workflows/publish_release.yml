@@ -27,10 +27,9 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
-      - name: Assemble
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: assemble
+      - uses: gradle/gradle-build-action@v2
+
+      - run: ./gradlew assemble
 
       - name: Unwrap GPG key
         env:
@@ -39,11 +38,7 @@ jobs:
         run: sudo bash -c "echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
 
       - name: Publish to Maven Central
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: publishReleasePublicationToMavenCentralRepository
+        run: ./gradlew publishReleasePublicationToMavenCentralRepository
 
       - name: Publish to Github Package Registry
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: publishReleasePublicationToGithubRepository
+        run: ./gradlew publishReleasePublicationToGithubRepository
