@@ -4,6 +4,14 @@ plugins {
     id("dev.zacsweers.ticktock")
 }
 
+tickTock {
+    tzVersion.set(provider { project.getProperty("lazythreetenbp.tzdbVersion") })
+    codeOutputDir.set(layout.projectDirectory.dir("src/main/kotlin"))
+    tzOutputDir.set(layout.projectDirectory.dir("src/main/assets"))
+    packageName.set("com.usefulness.threetenbp")
+    language.set("kotlin")
+}
+
 android {
     compileSdk 31
 
@@ -16,6 +24,9 @@ android {
     publishing {
         singleVariant("release")
     }
+    kotlinOptions {
+        freeCompilerArgs += '-Xexplicit-api=strict'
+    }
     lint {
         warningsAsErrors true
         checkReleaseBuilds false
@@ -27,14 +38,8 @@ android {
     }
 }
 
-Provider<Directory> generatedDir = layout.buildDirectory.dir("generated/ticktock")
-
-tickTock {
-    def tzdbVersion = libs.versions.maven.ticktock.get().split("-")[1]
-    tzVersion.set(project.findProperty("tzdbVersion") ?: tzdbVersion)
-    codeOutputDir.set(generatedDir)
-    tzOutputDir.set(layout.projectDirectory.dir("src/main/assets"))
-    packageName.set("com.gabrielittner.threetenbp")
+tasks.named("generateLazyZoneRules") {
+    finalizedBy("formatKotlin")
 }
 
 dependencies {

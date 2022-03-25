@@ -20,12 +20,7 @@ ticktock-compiler = { module = "dev.zacsweers.ticktock:ticktock-compiler", versi
 agp-gradle = { module = "com.android.tools.build:gradle", version.ref = "google-agp" }
 annotation-core = { module = "androidx.annotation:annotation", version.ref = "google-annotation" }
 threetenbp-core = { module = "org.threeten:threetenbp", version.ref = "maven-threetenbp" }
-javapoet-core = { module = "com.squareup:javapoet", version.ref = "maven-javapoet" }
-kotlinpoet-core = { module = "com.squareup:kotlinpoet", version.ref = "maven-kotlinpoet" }
-googleoptions-core = { module = "com.github.pcj:google-options", version.ref = "maven-googleoptions" }
 junit-core = { module = "junit:junit", version.ref = "maven-junit" }
 truth-core = { module = "com.google.truth:truth", version.ref = "maven-truth" }
-compiletesting-core = { module = "com.google.testing.compile:compile-testing", version.ref = "maven-compiletesting" }
-kotlincompiletesting-core = { module = "com.google.testing.compile:compile-testing", version.ref = "maven-kotlincompiletesting" }
 androidtest-runner = { module = "androidx.test:runner", version.ref = "google-androidtest" }
 androidtest-junitext = { module = "androidx.test.ext:junit-ktx", version.ref = "google-androidtestext" }

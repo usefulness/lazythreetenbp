@@ -13,20 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dev.zacsweers.ticktock.runtime;
-
-import androidx.annotation.NonNull;
-
-import java.util.Collection;
+package dev.zacsweers.ticktock.runtime
 
 /**
  * An interface for indicating available zone ids.
  */
-public interface ZoneIdsProvider {
-  /** The timezone data version (e.g. "2020a"). */
-  @NonNull
-  String getVersionId();
-  /** A collection of zone IDs included in this data set. */
-  @NonNull
-  Collection<String> getZoneIds();
+internal interface ZoneIdsProvider {
+
+    /** The timezone data version (e.g. "2020a").  */
+    fun getVersionId(): String
+
+    /** A collection of zone IDs included in this data set.  */
+    fun getZoneIds(): Collection<String?>
 }
