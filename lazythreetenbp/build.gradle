@@ -4,6 +4,16 @@ plugins {
     id("dev.zacsweers.ticktock")
 }
 
+Provider<Directory> generatedDir = layout.buildDirectory.dir("generated/ticktock")
+
+tickTock {
+    def tzdbVersion = libs.versions.maven.ticktock.get().split("-")[1]
+    tzVersion.set(project.findProperty("tzdbVersion") ?: tzdbVersion)
+    codeOutputDir.set(generatedDir)
+    tzOutputDir.set(layout.projectDirectory.dir("src/main/assets"))
+    packageName.set("com.gabrielittner.threetenbp")
+}
+
 android {
     compileSdk 31
 
@@ -20,21 +30,14 @@ android {
         warningsAsErrors true
         checkReleaseBuilds false
     }
+    sourceSets {
+        main.java.srcDir(generatedDir)
+    }
     androidComponents {
         beforeVariants(selector().withBuildType("release")) { builder ->
             builder.enable = true
         }
     }
-}
-
-Provider<Directory> generatedDir = layout.buildDirectory.dir("generated/ticktock")
-
-tickTock {
-    def tzdbVersion = libs.versions.maven.ticktock.get().split("-")[1]
-    tzVersion.set(project.findProperty("tzdbVersion") ?: tzdbVersion)
-    codeOutputDir.set(generatedDir)
-    tzOutputDir.set(layout.projectDirectory.dir("src/main/assets"))
-    packageName.set("com.gabrielittner.threetenbp")
 }
 
 dependencies {
