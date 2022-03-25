@@ -1,5 +1,9 @@
 # LazyThreeTenBp
 
+[![Build Status](https://github.com/usefulness/lazythreetenbp/workflows/Build%20project/badge.svg)](https://github.com/usefulness/lazythreetenbp/actions)
+![Maven Central](https://img.shields.io/maven-central/v/com.github.usefulness/lazythreetenbp)
+
+
 A lazy loading ZoneRuleProvider for ThreeTenBp.
 
 ## Usage
