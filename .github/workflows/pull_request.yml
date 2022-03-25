@@ -45,7 +45,7 @@ jobs:
           name: lint-results
           path: '${{ github.workspace }}/**/build/**/reports/lint-results-*.html'
 
-  icons-test:
+  ui-test:
     runs-on: macos-latest
     strategy:
       matrix:
@@ -71,12 +71,12 @@ jobs:
           api-level: ${{ matrix.apiVersion }}
           profile: pixel_xl
           target: google_apis
-          arch: x86
+          arch: x86_64
           disable-spellchecker: true
           script: ./gradlew connectedCheck
 
       - name: Upload tests result
         uses: actions/upload-artifact@v3
         with:
-          name: screenshots
+          name: test-results
           path: "${{ github.workspace }}/**/build/*AndroidTest/"
