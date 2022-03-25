@@ -18,7 +18,7 @@ package dev.zacsweers.ticktock.runtime
 /**
  * An interface for indicating available zone ids.
  */
-interface ZoneIdsProvider {
+internal interface ZoneIdsProvider {
 
     /** The timezone data version (e.g. "2020a").  */
     fun getVersionId(): String

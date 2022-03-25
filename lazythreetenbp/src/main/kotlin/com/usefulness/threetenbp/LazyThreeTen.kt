@@ -9,7 +9,7 @@ import org.threeten.bp.ZoneId
 import org.threeten.bp.zone.ZoneRulesProvider
 import java.util.concurrent.atomic.AtomicBoolean
 
-object LazyThreeTen {
+public object LazyThreeTen {
 
     private val INITIALIZED = AtomicBoolean()
 
@@ -18,7 +18,7 @@ object LazyThreeTen {
      */
     @JvmStatic
     @MainThread
-    fun init(context: Context) {
+    public fun init(context: Context) {
         if (INITIALIZED.getAndSet(true)) {
             return
         }
@@ -31,7 +31,7 @@ object LazyThreeTen {
      */
     @JvmStatic
     @WorkerThread
-    fun cacheZones() {
+    public fun cacheZones() {
         ZoneId.systemDefault().rules
         for (zoneId in ZoneRulesProvider.getAvailableZoneIds()) {
             ZoneRulesProvider.getRules(zoneId, true)

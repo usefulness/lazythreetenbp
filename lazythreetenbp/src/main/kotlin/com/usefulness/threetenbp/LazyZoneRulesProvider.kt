@@ -18,7 +18,7 @@ internal class LazyZoneRulesProvider(private val context: Context) : ZoneRulesPr
     private val map = ConcurrentSkipListMap<String, ZoneRules?>()
 
     override fun provideZoneIds() =
-        HashSet(GeneratedZoneIdsProvider.zoneIds)
+        HashSet(GeneratedZoneIdsProvider.getZoneIds())
 
     override fun provideRules(zoneId: String, forCaching: Boolean): ZoneRules {
         Jdk8Methods.requireNonNull(zoneId, "zoneId")
@@ -31,7 +31,7 @@ internal class LazyZoneRulesProvider(private val context: Context) : ZoneRulesPr
     }
 
     override fun provideVersions(zoneId: String): NavigableMap<String, ZoneRules> {
-        val versionId = GeneratedZoneIdsProvider.versionId
+        val versionId = GeneratedZoneIdsProvider.getVersionId()
         val rules = provideRules(zoneId, false)
 
         return TreeMap(mapOf(versionId to rules))

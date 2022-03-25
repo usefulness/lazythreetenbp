@@ -5,7 +5,7 @@ plugins {
 }
 
 tickTock {
-    tzVersion.set(project.getProperty("lazythreetenbp.tzdbVersion"))
+    tzVersion.set(provider { project.getProperty("lazythreetenbp.tzdbVersion") })
     codeOutputDir.set(layout.projectDirectory.dir("src/main/kotlin"))
     tzOutputDir.set(layout.projectDirectory.dir("src/main/assets"))
     packageName.set("com.usefulness.threetenbp")
@@ -24,6 +24,9 @@ android {
     publishing {
         singleVariant("release")
     }
+    kotlinOptions {
+        freeCompilerArgs += '-Xexplicit-api=strict'
+    }
     lint {
         warningsAsErrors true
         checkReleaseBuilds false
@@ -33,6 +36,10 @@ android {
             builder.enable = true
         }
     }
+}
+
+tasks.named("generateLazyZoneRules") {
+    finalizedBy("formatKotlin")
 }
 
 dependencies {

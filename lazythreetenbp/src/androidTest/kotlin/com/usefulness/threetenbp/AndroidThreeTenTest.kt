@@ -8,7 +8,7 @@ import org.junit.runner.RunWith
 import org.threeten.bp.zone.ZoneRulesProvider
 
 @RunWith(AndroidJUnit4::class)
-class AndroidThreeTenTest {
+internal class AndroidThreeTenTest {
 
     private val context = InstrumentationRegistry.getInstrumentation().context
 
