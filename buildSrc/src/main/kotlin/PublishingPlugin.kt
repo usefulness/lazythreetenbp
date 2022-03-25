@@ -53,7 +53,7 @@ class PublishingPlugin : Plugin<Project> {
                             pom.licenses { licenses ->
                                 licenses.license { license ->
                                     license.name.set("MIT")
-                                    license.url.set("https://github.com/usefulness/lazythreetenbp/blob/master/LICENSE")
+                                    license.url.set("https://github.com/usefulness/lazythreetenbp/blob/master/LICENSE.txt")
                                 }
                             }
                             pom.developers { developers ->
