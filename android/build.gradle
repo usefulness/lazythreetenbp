@@ -1,0 +1,46 @@
+plugins {
+    id("com.starter.library.android")
+    id("dev.zacsweers.ticktock")
+}
+
+android {
+    compileSdk 31
+
+    namespace = "com.gabrielittner.threetenbp"
+    defaultConfig {
+        minSdk 23
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    lint {
+        warningsAsErrors true
+        checkReleaseBuilds false
+    }
+    androidComponents {
+        beforeVariants(selector().withBuildType("release")) { builder ->
+            builder.enable = true
+        }
+    }
+}
+
+Provider<Directory> generatedDir = layout.buildDirectory.dir("generated/ticktock")
+
+tickTock {
+    def tzdbVersion = libs.versions.maven.ticktock.get().split("-")[1]
+    tzVersion.set(project.findProperty("tzdbVersion") ?: tzdbVersion)
+    codeOutputDir.set(generatedDir)
+    tzOutputDir.set(layout.projectDirectory.dir("src/main/assets"))
+    packageName.set("com.gabrielittner.threetenbp")
+}
+
+dependencies {
+    tickTockCompiler libs.ticktock.compiler
+    compileOnly libs.annotation.core
+    implementation "org.threeten:threetenbp:1.6.0:no-tzdb"
+
+    androidTestImplementation libs.junit.core
+    androidTestImplementation libs.truth.core
+    androidTestImplementation libs.androidtest.runner
+    androidTestImplementation libs.androidtest.junitext
+}

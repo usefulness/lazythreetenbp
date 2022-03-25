@@ -1,49 +1,27 @@
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
-        classpath 'de.undercouch:gradle-download-task:4.1.1'
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.12.0'
-        classpath 'dev.zacsweers.ticktock:ticktock-gradle-plugin:0.1.1'
-    }
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+    id("com.starter.config")
+    id("com.starter.versioning")
+}
+
+commonConfig {
+    javaFilesAllowed true
+    javaVersion JavaVersion.VERSION_1_8
 }
 
 allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        jcenter()
+    tasks.withType(KotlinCompile).configureEach {
+        kotlinOptions {
+            apiVersion = "1.5"
+            languageVersion = "1.5"
+        }
+    }
+    pluginManager.withPlugin("java") {
+        java {
+            toolchain {
+                languageVersion = JavaLanguageVersion.of(JavaVersion.VERSION_17.toString())
+            }
+        }
     }
 }
-
-ext {
-    running_on_ci = 'true'.equals(System.getenv('CI'))
-
-    version_java = JavaVersion.VERSION_1_7
-
-    version_android_minimum_sdk = 16
-    version_android_compile_sdk = 28
-}
-
-ext.deps = [
-        //runtime
-        support_annotations : "androidx.annotation:annotation:1.1.0",
-        threetenbp_notzdb : "org.threeten:threetenbp:1.4.4:no-tzdb",
-
-        //compiler
-        threetenbp : "org.threeten:threetenbp:1.4.4",
-        javapoet : "com.squareup:javapoet:1.13.0",
-        kotlinpoet : "com.squareup:kotlinpoet:1.6.0",
-        google_options: "com.github.pcj:google-options:1.0.0",
-
-        //test
-        junit: 'junit:junit:4.13',
-        truth: 'com.google.truth:truth:1.0.1',
-        compile_testing: 'com.google.testing.compile:compile-testing:0.18',
-        kotlin_compile_testing: 'com.github.tschuchortdev:kotlin-compile-testing:1.2.9',
-        androidTestRunner: 'com.android.support.test:runner:1.0.2',
-]
