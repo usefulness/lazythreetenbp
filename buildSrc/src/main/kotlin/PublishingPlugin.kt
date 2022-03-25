@@ -25,7 +25,7 @@ class PublishingPlugin : Plugin<Project> {
             with(repositories) {
                 maven { maven ->
                     maven.name = "github"
-                    maven.setUrl("https://maven.pkg.github.com/usefulness/slidr")
+                    maven.setUrl("https://maven.pkg.github.com/usefulness/lazythreetenbp")
                     with(maven.credentials) {
                         username = "usefulness"
                         password = findConfig("GITHUB_TOKEN")
@@ -48,12 +48,12 @@ class PublishingPlugin : Plugin<Project> {
                         publication.artifacts.artifact(tasks.getByName("androidSourcesJar"))
                         publication.pom { pom ->
                             pom.name.set("${project.group}:${project.name}")
-                            pom.description.set("Swipe edge to go back - android library")
-                            pom.url.set("https://github.com/usefulness/slidr")
+                            pom.description.set("ThreeTenBp Lazy Zone Provider")
+                            pom.url.set("https://github.com/usefulness/lazythreetenbp")
                             pom.licenses { licenses ->
                                 licenses.license { license ->
                                     license.name.set("MIT")
-                                    license.url.set("https://github.com/usefulness/slidr/blob/master/LICENSE")
+                                    license.url.set("https://github.com/usefulness/lazythreetenbp/blob/master/LICENSE")
                                 }
                             }
                             pom.developers { developers ->
@@ -64,9 +64,9 @@ class PublishingPlugin : Plugin<Project> {
                                 }
                             }
                             pom.scm { scm ->
-                                scm.connection.set("scm:git:github.com/usefulness/slidr.git")
-                                scm.developerConnection.set("scm:git:ssh://github.com/usefulness/slidr.git")
-                                scm.url.set("https://github.com/usefulness/slidr/tree/master")
+                                scm.connection.set("scm:git:github.com/usefulness/lazythreetenbplazythreetenbp.git")
+                                scm.developerConnection.set("scm:git:ssh://github.com/usefulness/lazythreetenbp.git")
+                                scm.url.set("https://github.com/usefulness/lazythreetenbp/tree/master")
                             }
                         }
                     }
