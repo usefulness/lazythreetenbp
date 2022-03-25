@@ -5,8 +5,7 @@ plugins {
 }
 
 tickTock {
-    def tzdbVersion = project.findProperty("lazythreetenbp.tzdbVersion")
-    tzVersion.set(tzdbVersion)
+    tzVersion.set(project.getProperty("lazythreetenbp.tzdbVersion"))
     codeOutputDir.set(layout.projectDirectory.dir("src/main/kotlin"))
     tzOutputDir.set(layout.projectDirectory.dir("src/main/assets"))
     packageName.set("com.usefulness.threetenbp")
