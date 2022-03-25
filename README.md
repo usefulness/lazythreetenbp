@@ -7,11 +7,10 @@ A lazy loading ZoneRuleProvider for ThreeTenBp.
 You have to initialize LazyThreeTenBp as early as possible, before your code accesses any threetenbp
 class. Usually the best place is in your `Application.onCreate()` method:
 
-```java
-@Override
-public void onCreate() {
-    super.onCreate();
-    LazyThreeTen.init(this);
+```kotlin
+override fun onCreate() {
+    super.onCreate()
+    LazyThreeTen.init(this)
 }
 ```
 
@@ -28,8 +27,6 @@ implementation "org.threeten:threetenbp:1.6.0:no-tzdb"
 implementation "com.github.usefulness:lazythreetenbp:${version}"
 ```
 
-Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
-
 ## Changes
 
 Compiler
@@ -45,26 +42,4 @@ Runtime
 ## Update tzdb data
 
 1. Check for the latest tzdb version at https://www.iana.org/time-zones
-2. Run `./gradlew processTzdb -PtzdbVersion=VERSION`
-
-## License
-
-```
-Copyright 2017 Gabriel Ittner.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
-
-
-
- [snap]: https://oss.sonatype.org/content/repositories/snapshots/
+2. Run `./gradlew generateLazyZoneRules -PtzdbVersion=VERSION`
