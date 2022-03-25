@@ -27,6 +27,10 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
+      - uses: gradle/gradle-build-action@v2
+
+      - run: ./gradlew assembleRelease
+
       - uses: actions/cache@v3
         name: Download base
         with:
@@ -35,16 +39,11 @@ jobs:
           key: diffuse-${{ github.event.pull_request.base.sha }}
           restore-keys: diffuse-${{ github.event.pull_request.base.sha }}
 
-      - name: Assemble
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: assembleRelease
-
       - id: diffuse
         uses: usefulness/diffuse-action@v1
         with:
           old-file-path: diffuse-source-file-release
-          new-file-path: android/build/outputs/aar/android-release.aar
+          new-file-path: lazythreetenbp/build/outputs/aar/lazythreetenbp-release.aar
 
       - uses: peter-evans/find-comment@v1
         id: find_comment

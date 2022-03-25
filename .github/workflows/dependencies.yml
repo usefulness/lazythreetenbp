@@ -26,8 +26,7 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
-      - name: Assemble
-        uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v2
 
       - run: ./gradlew assembleRelease -m
 
@@ -35,7 +34,7 @@ jobs:
         name: Generate dependency diff
         uses: usefulness/dependency-tree-diff-action@v1
         with:
-          project: 'android'
+          project: 'lazythreetenbp'
           configuration: releaseRuntimeClasspath
 
       - uses: peter-evans/find-comment@v1
