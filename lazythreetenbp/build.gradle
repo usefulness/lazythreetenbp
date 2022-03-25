@@ -4,14 +4,13 @@ plugins {
     id("dev.zacsweers.ticktock")
 }
 
-Provider<Directory> generatedDir = layout.buildDirectory.dir("generated/ticktock")
-
 tickTock {
-    def tzdbVersion = libs.versions.maven.ticktock.get().split("-")[1]
-    tzVersion.set(project.findProperty("tzdbVersion") ?: tzdbVersion)
-    codeOutputDir.set(generatedDir)
+    def tzdbVersion = project.findProperty("lazythreetenbp.tzdbVersion")
+    tzVersion.set(tzdbVersion)
+    codeOutputDir.set(layout.projectDirectory.dir("src/main/kotlin"))
     tzOutputDir.set(layout.projectDirectory.dir("src/main/assets"))
-    packageName.set("com.gabrielittner.threetenbp")
+    packageName.set("com.usefulness.threetenbp")
+    language.set("kotlin")
 }
 
 android {
@@ -29,9 +28,6 @@ android {
     lint {
         warningsAsErrors true
         checkReleaseBuilds false
-    }
-    sourceSets {
-        main.java.srcDir(generatedDir)
     }
     androidComponents {
         beforeVariants(selector().withBuildType("release")) { builder ->

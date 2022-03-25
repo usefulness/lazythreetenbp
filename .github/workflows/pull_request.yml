@@ -50,6 +50,7 @@ jobs:
     strategy:
       matrix:
         apiVersion: [ 23, 28, 30, 31 ]
+      fail-fast: false
 
     steps:
       - name: checkout
