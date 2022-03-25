@@ -7,7 +7,7 @@ plugins {
 android {
     compileSdk 31
 
-    namespace = "com.gabrielittner.threetenbp"
+    namespace = rootProject.name
     defaultConfig {
         minSdk 23
 
