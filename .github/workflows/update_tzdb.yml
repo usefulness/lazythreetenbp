@@ -31,6 +31,7 @@ jobs:
           tar -xf tzdata-latest.tar.gz version
           echo '::set-output name=tzdb-version::$(cat version)'
           rm tzdata-latest.tar.gz
+          rm version
 
       - id: should-run
         run: |
