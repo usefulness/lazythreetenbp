@@ -30,6 +30,8 @@ jobs:
           wget -q https://data.iana.org/time-zones/tzdata-latest.tar.gz
           tar -xf tzdata-latest.tar.gz version
           echo '::set-output name=tzdb-version::$(cat version)'
+          rm tzdata-latest.tar.gz
+          rm version
 
       - id: should-run
         run: |
@@ -42,3 +44,5 @@ jobs:
 
       - run: ./gradlew generateLazyZoneRules -Plazythreetenbp.tzdbVersion=${{ steps.latest-tzdb-version.outputs.tzdb-version }}
         if: steps.should-run.outputs.version-changed
+
+      - run: git status
