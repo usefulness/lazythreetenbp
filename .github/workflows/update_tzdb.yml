@@ -23,7 +23,7 @@ jobs:
 
       - id: current-tzdb-version
         run: |
-          echo '::set-output name=TZDB_VERSION::$(grep "ticktock.ianaVersion" "tzdb_version.properties" | cut -d'=' -f2)'
+          echo '::set-output name=TZDB_VERSION::$(grep "ianaVersion" "tzdb_version.properties" | cut -d'=' -f2)'
 
       - id: latest-tzdb-version
         run: |
