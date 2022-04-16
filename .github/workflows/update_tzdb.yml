@@ -31,9 +31,11 @@ jobs:
           tar -xf tzdata-latest.tar.gz version
           echo '::set-output name=tzdb_version::$(cat version)'
 
-      - run: echo "The latest versions is ${{ steps.latest-tzdb-version.outputs.tzdb_version }}"
+      - run: echo "Current version is >>${{ steps.current-tzdb-version.outputs.tzdb_version }}<<"
+      - run: echo "Latest versions is >>${{ steps.latest-tzdb-version.outputs.tzdb_version }}<<"
 
-      - run: echo "Current version is ${{ steps.current-tzdb-version.outputs.tzdb_version }}"
+      - if: ${{ steps.current-tzdb-version.outputs.tzdb_version == steps.current-tzdb-version.outputs.tzdb_version }}
+        run: echo "This worked"
 
       - if: ${{ steps.current-tzdb-version.outputs.tzdb_version == steps.latest-tzdb-version.outputs.tzdb_version }}
-        run: echo "COmparison works"
+        run: ./gradlew generateLazyZoneRules -Plazythreetenbp.tzdbVersion=${{ steps.latest-tzdb-version.outputs.tzdb_version }}
