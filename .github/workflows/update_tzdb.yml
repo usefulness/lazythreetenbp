@@ -23,14 +23,17 @@ jobs:
 
       - id: current-tzdb-version
         run: |
-          echo '::set-output name=TZDB_VERSION::$(grep "ianaVersion" "tzdb_version.properties" | cut -d'=' -f2)'
+          echo '::set-output name=tzdb_version::$(grep "ianaVersion" "tzdb_version.properties" | cut -d'=' -f2)'
 
       - id: latest-tzdb-version
         run: |
           wget -q https://data.iana.org/time-zones/tzdata-latest.tar.gz
           tar -xf tzdata-latest.tar.gz version
-          echo '::set-output name=TZDB_VERSION::$(cat version)'
+          echo '::set-output name=tzdb_version::$(cat version)'
 
-      - run: echo "The latest versions color is ${{ steps.latest-tzdb-version.outputs.TZDB_VERSION }}"
+      - run: echo "The latest versions is ${{ steps.latest-tzdb-version.outputs.tzdb_version }}"
 
-      - run: echo "Current version is ${{ steps.current-tzdb-version.outputs.TZDB_VERSION }}"
+      - run: echo "Current version is ${{ steps.current-tzdb-version.outputs.tzdb_version }}"
+
+      - if: ${{ steps.current-tzdb-version.outputs.tzdb_version == steps.latest-tzdb-version.outputs.tzdb_version }}
+        run: echo "COmparison works"
