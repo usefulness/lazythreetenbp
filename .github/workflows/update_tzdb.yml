@@ -21,10 +21,16 @@ jobs:
 
       - uses: gradle/gradle-build-action@v2
 
+      - id: current-tzdb-version
+        run: |
+          echo '::set-output name=TZDB_VERSION::$(grep "ticktock.ianaVersion" "tzdb_version.properties" | cut -d'=' -f2)'
+
       - id: latest-tzdb-version
         run: |
           wget -q https://data.iana.org/time-zones/tzdata-latest.tar.gz
           tar -xf tzdata-latest.tar.gz version
-          echo '::set-output name=LATEST_TZDB::$(cat version)'
+          echo '::set-output name=TZDB_VERSION::$(cat version)'
 
-      - run: echo "The selected color is ${{ steps.latest-tzdb-version.outputs.LATEST_TZDB }}"
+      - run: echo "The latest versions color is ${{ steps.latest-tzdb-version.outputs.TZDB_VERSION }}"
+
+      - run: echo "Current version is ${{ steps.current-tzdb-version.outputs.TZDB_VERSION }}"

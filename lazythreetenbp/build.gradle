@@ -44,10 +44,10 @@ tasks.named("generateLazyZoneRules") {
 }
 
 tasks.register("writeTzdbVersion") {
-    File target = rootProject.file("tzdb_version.properties")
+    def target = rootProject.file("tzdb_version.properties")
     doLast {
         def updatedVersion = tickTock.tzVersion.get()
-        target.text = "tzdb_version=$updatedVersion\n"
+        target.text = "ianaVersion=$updatedVersion\n"
     }
 }
 
