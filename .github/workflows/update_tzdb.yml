@@ -52,12 +52,13 @@ jobs:
         if: steps.should-run.outputs.version-changed
         uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: Update report
+          token: ${{ secrets.PUBLIC_REPO_TOKEN }}
+          commit-message: "Update TZDB to ${{ steps.latest-tzdb-version.outputs.tzdb-version }}"
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           delete-branch: true
           title: "Update TZDB to ${{ steps.latest-tzdb-version.outputs.tzdb-version }}"
           body: |
-            Update TZDB to **${{ steps.latest-tzdb-version.outputs.tzdb-version }}**]
+            Update TZDB to **${{ steps.latest-tzdb-version.outputs.tzdb-version }}**
             
             Details: https://www.iana.org/time-zones
