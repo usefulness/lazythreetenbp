@@ -35,12 +35,11 @@ jobs:
         run: |
           echo "Current version is >>${{ steps.current-tzdb-version.outputs.tzdb-version }}<<"
           echo "Latest versions is >>${{ steps.latest-tzdb-version.outputs.tzdb-version }}<<"
-          echo '::set-output name=should_run::$(cat version)'
           if [ "${{ steps.current-tzdb-version.outputs.tzdb-version }}" == "${{ steps.latest-tzdb-version.outputs.tzdb-version }}" ]; 
-            then echo '::set-output name=version-changed::true' fi
+          then echo '::set-output name=version-changed::true' fi
 
-      - if: steps.current-tzdb-version.outputs.tzdb-version == steps.latest-tzdb-version.outputs.tzdb-version
+      - if: should-run.version-changed
         run: echo "This worked"
 
-      - if: steps.current-tzdb-version.outputs.tzdb-version == steps.latest-tzdb-version.outputs.tzdb-version
+      - if: should-run.version-changed
         run: ./gradlew generateLazyZoneRules -Plazythreetenbp.tzdbVersion=${{ steps.latest-tzdb-version.outputs.tzdb-version }}
