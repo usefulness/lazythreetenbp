@@ -19,8 +19,6 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
-      - uses: gradle/gradle-build-action@v2
-
       - id: current-tzdb-version
         run: |
           echo '::set-output name=tzdb-version::$(grep "ianaVersion" "tzdb_version.properties" | cut -d'=' -f2)'
@@ -29,7 +27,8 @@ jobs:
         run: |
           wget -q https://data.iana.org/time-zones/tzdata-latest.tar.gz
           tar -xf tzdata-latest.tar.gz version
-          echo '::set-output name=tzdb-version::$(cat version)'
+          LATEST_VERSION=$(cat version)
+          echo '::set-output name=tzdb-version::$LATEST_VERSION'
           rm tzdata-latest.tar.gz
           rm version
 
@@ -41,6 +40,9 @@ jobs:
           then 
             echo '::set-output name=version-changed::true' 
           fi
+
+      - uses: gradle/gradle-build-action@v2
+        if: steps.should-run.outputs.version-changed
 
       - run: ./gradlew generateLazyZoneRules -Plazythreetenbp.tzdbVersion=${{ steps.latest-tzdb-version.outputs.tzdb-version }}
         if: steps.should-run.outputs.version-changed
