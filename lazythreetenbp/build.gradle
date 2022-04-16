@@ -40,6 +40,15 @@ android {
 
 tasks.named("generateLazyZoneRules") {
     finalizedBy("formatKotlin")
+    finalizedBy("writeVersionProperties")
+}
+
+tasks.register("writeTzdbVersion") {
+    File target = rootProject.file("tzdb_version.properties")
+    doLast {
+        def updatedVersion = tickTock.tzVersion.get()
+        target.text = "tzdb_version=$updatedVersion\n"
+    }
 }
 
 dependencies {
