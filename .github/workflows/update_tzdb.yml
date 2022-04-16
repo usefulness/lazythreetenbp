@@ -1,0 +1,30 @@
+name: TZDB check
+
+on:
+  push:
+  schedule:
+    - cron: '0 3 * * 1,4'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - uses: gradle/gradle-build-action@v2
+
+      - id: latest-tzdb-version
+        run: |
+          wget -q https://data.iana.org/time-zones/tzdata-latest.tar.gz
+          tar -xf tzdata-latest.tar.gz version
+          echo '::set-output name=LATEST_TZDB::$(cat version)'
+
+      - run: echo "The selected color is ${{ steps.latest-tzdb-version.outputs.LATEST_TZDB }}"
