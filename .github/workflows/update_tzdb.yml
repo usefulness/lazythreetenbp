@@ -23,19 +23,24 @@ jobs:
 
       - id: current-tzdb-version
         run: |
-          echo '::set-output name=tzdb_version::$(grep "ianaVersion" "tzdb_version.properties" | cut -d'=' -f2)'
+          echo '::set-output name=tzdb-version::$(grep "ianaVersion" "tzdb_version.properties" | cut -d'=' -f2)'
 
       - id: latest-tzdb-version
         run: |
           wget -q https://data.iana.org/time-zones/tzdata-latest.tar.gz
           tar -xf tzdata-latest.tar.gz version
-          echo '::set-output name=tzdb_version::$(cat version)'
+          echo '::set-output name=tzdb-version::$(cat version)'
 
-      - run: echo "Current version is >>${{ steps.current-tzdb-version.outputs.tzdb_version }}<<"
-      - run: echo "Latest versions is >>${{ steps.latest-tzdb-version.outputs.tzdb_version }}<<"
+      - id: should-run
+        run: |
+          echo "Current version is >>${{ steps.current-tzdb-version.outputs.tzdb-version }}<<"
+          echo "Latest versions is >>${{ steps.latest-tzdb-version.outputs.tzdb-version }}<<"
+          echo '::set-output name=should_run::$(cat version)'
+          if [ "${{ steps.current-tzdb-version.outputs.tzdb-version }}" == "${{ steps.latest-tzdb-version.outputs.tzdb-version }}" ]; 
+            then echo '::set-output name=version-changed::true' fi
 
-      - if: steps.latest-tzdb-version.outputs.tzdb_version == steps.latest-tzdb-version.outputs.tzdb_version
+      - if: steps.current-tzdb-version.outputs.tzdb-version == steps.latest-tzdb-version.outputs.tzdb-version
         run: echo "This worked"
 
-      - if: steps.current-tzdb-version.outputs.tzdb_version == steps.latest-tzdb-version.outputs.tzdb_version
-        run: ./gradlew generateLazyZoneRules -Plazythreetenbp.tzdbVersion=${{ steps.latest-tzdb-version.outputs.tzdb_version }}
+      - if: steps.current-tzdb-version.outputs.tzdb-version == steps.latest-tzdb-version.outputs.tzdb-version
+        run: ./gradlew generateLazyZoneRules -Plazythreetenbp.tzdbVersion=${{ steps.latest-tzdb-version.outputs.tzdb-version }}
