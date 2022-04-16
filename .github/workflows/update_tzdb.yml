@@ -1,0 +1,64 @@
+name: TZDB version update
+
+on:
+  schedule:
+    - cron: '0 3 * * 1,4'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - id: current-tzdb-version
+        run: |
+          echo '::set-output name=tzdb-version::$(grep "ianaVersion" "tzdb_version.properties" | cut -d'=' -f2)'
+
+      - id: latest-tzdb-version
+        run: |
+          wget -q https://data.iana.org/time-zones/tzdata-latest.tar.gz
+          tar -xf tzdata-latest.tar.gz version
+          LATEST_VERSION=$(cat version)
+          echo "::set-output name=tzdb-version::$LATEST_VERSION"
+          rm tzdata-latest.tar.gz
+          rm version
+
+      - id: should-run
+        run: |
+          echo "Current version is >>${{ steps.current-tzdb-version.outputs.tzdb-version }}<<"
+          echo "Latest versions is >>${{ steps.latest-tzdb-version.outputs.tzdb-version }}<<"
+          if [ "${{ steps.current-tzdb-version.outputs.tzdb-version }}" != "${{ steps.latest-tzdb-version.outputs.tzdb-version }}" ]; 
+          then 
+            echo '::set-output name=version-changed::true' 
+          fi
+
+      - uses: gradle/gradle-build-action@v2
+        if: steps.should-run.outputs.version-changed
+
+      - run: ./gradlew generateLazyZoneRules -Plazythreetenbp.tzdbVersion=${{ steps.latest-tzdb-version.outputs.tzdb-version }}
+        if: steps.should-run.outputs.version-changed
+
+      - run: git status
+
+      - name: Create Pull Request
+        if: steps.should-run.outputs.version-changed
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.PUBLIC_REPO_TOKEN }}
+          commit-message: "Update TZDB to ${{ steps.latest-tzdb-version.outputs.tzdb-version }}"
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          delete-branch: true
+          title: "Update TZDB to ${{ steps.latest-tzdb-version.outputs.tzdb-version }}"
+          body: |
+            Update TZDB to **${{ steps.latest-tzdb-version.outputs.tzdb-version }}**
+            
+            Details: https://www.iana.org/time-zones
