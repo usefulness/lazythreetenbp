@@ -34,7 +34,7 @@ jobs:
       - run: echo "Current version is >>${{ steps.current-tzdb-version.outputs.tzdb_version }}<<"
       - run: echo "Latest versions is >>${{ steps.latest-tzdb-version.outputs.tzdb_version }}<<"
 
-      - if: ${{ steps.current-tzdb-version.outputs.tzdb_version == steps.current-tzdb-version.outputs.tzdb_version }}
+      - if: ${{ steps.latest-tzdb-version.outputs.tzdb_version == steps.latest-tzdb-version.outputs.tzdb_version }}
         run: echo "This worked"
 
       - if: ${{ steps.current-tzdb-version.outputs.tzdb_version == steps.latest-tzdb-version.outputs.tzdb_version }}
