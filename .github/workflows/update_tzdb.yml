@@ -28,7 +28,7 @@ jobs:
           wget -q https://data.iana.org/time-zones/tzdata-latest.tar.gz
           tar -xf tzdata-latest.tar.gz version
           LATEST_VERSION=$(cat version)
-          echo '::set-output name=tzdb-version::$LATEST_VERSION'
+          echo "::set-output name=tzdb-version::$LATEST_VERSION"
           rm tzdata-latest.tar.gz
           rm version
 
