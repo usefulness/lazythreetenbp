@@ -30,13 +30,12 @@ jobs:
           LATEST_VERSION=$(cat version)
           echo "::set-output name=tzdb-version::$LATEST_VERSION"
           rm tzdata-latest.tar.gz
-          rm version
 
       - id: should-run
         run: |
           echo "Current version is >>${{ steps.current-tzdb-version.outputs.tzdb-version }}<<"
           echo "Latest versions is >>${{ steps.latest-tzdb-version.outputs.tzdb-version }}<<"
-          if [ "${{ steps.current-tzdb-version.outputs.tzdb-version }}" != "${{ steps.latest-tzdb-version.outputs.tzdb-version }}" ]; 
+          if [ "${{ steps.current-tzdb-version.outputs.tzdb-version }}" == "${{ steps.latest-tzdb-version.outputs.tzdb-version }}" ]; 
           then 
             echo '::set-output name=version-changed::true' 
           fi
