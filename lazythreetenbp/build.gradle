@@ -38,17 +38,17 @@ android {
     }
 }
 
-tasks.named("generateLazyZoneRules") {
-    finalizedBy("formatKotlin")
-    finalizedBy("writeVersionProperties")
-}
-
 tasks.register("writeTzdbVersion") {
     def target = rootProject.file("tzdb_version.properties")
     doLast {
         def updatedVersion = tickTock.tzVersion.get()
         target.text = "ianaVersion=$updatedVersion\n"
     }
+}
+
+tasks.named("generateLazyZoneRules") {
+    finalizedBy("formatKotlin")
+    finalizedBy("writeTzdbVersion")
 }
 
 dependencies {

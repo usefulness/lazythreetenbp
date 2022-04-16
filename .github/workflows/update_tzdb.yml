@@ -40,9 +40,5 @@ jobs:
             echo '::set-output name=version-changed::true' 
           fi
 
-      - run: echo "This worked"
-        if: steps.should-run.outputs.version-changed
-
-
       - run: ./gradlew generateLazyZoneRules -Plazythreetenbp.tzdbVersion=${{ steps.latest-tzdb-version.outputs.tzdb-version }}
         if: steps.should-run.outputs.version-changed
