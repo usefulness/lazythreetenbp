@@ -79,4 +79,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test-results
-          path: "${{ github.workspace }}/**/build/*AndroidTest/"
+          path: "${{ github.workspace }}/**/reports/**"
