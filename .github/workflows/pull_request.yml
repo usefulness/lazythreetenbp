@@ -78,5 +78,5 @@ jobs:
       - name: Upload tests result
         uses: actions/upload-artifact@v3
         with:
-          name: test-results
+          name: "test-results [${{ matrix.apiVersion }}]"
           path: "${{ github.workspace }}/**/reports/**"
