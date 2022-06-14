@@ -1,7 +1,7 @@
 plugins {
     id 'java-gradle-plugin'
-    id "org.jmailen.kotlinter" version "3.10.0"
-    id 'org.jetbrains.kotlin.jvm' version '1.7.0'
+    alias(libs.plugins.jmailen.kotlinter)
+    alias(libs.plugins.kotlin.jvm)
 }
 
 repositories {
@@ -10,9 +10,9 @@ repositories {
 }
 
 dependencies {
-    implementation("com.project.starter:android:0.45.0")
-    implementation("de.undercouch:gradle-download-task:5.1.0")
-    implementation("dev.zacsweers.ticktock:ticktock-gradle-plugin:1.2.0-2021e")
+    implementation(libs.starter.gradle)
+    implementation(libs.gradledownloadtask.core)
+    implementation(libs.ticktock.gradle)
 }
 
 gradlePlugin {
