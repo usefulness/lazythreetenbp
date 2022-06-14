@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.project.starter:android:0.45.0")
+    implementation("com.project.starter:android:0.46.0")
     implementation("de.undercouch:gradle-download-task:5.1.0")
     implementation("dev.zacsweers.ticktock:ticktock-gradle-plugin:1.2.0-2021e")
 }
