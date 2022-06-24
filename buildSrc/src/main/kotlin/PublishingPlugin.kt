@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION") // https://issuetracker.google.com/issues/170650362
+
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.api.AndroidSourceDirectorySet
 import org.gradle.api.Plugin
