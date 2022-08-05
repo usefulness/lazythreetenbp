@@ -596,7 +596,7 @@ internal object GeneratedZoneIdsProvider : ZoneIdsProvider {
         "Universal",
         "W-SU",
         "WET",
-        "Zulu"
+        "Zulu",
     )
 
     public override fun getVersionId(): String = VERSION_ID
