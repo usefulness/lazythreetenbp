@@ -14,7 +14,7 @@ maven-truth = "1.1.3"
 maven-compiletesting = "0.19"
 maven-kotlincompiletesting = "1.2.9"
 maven-ticktock = "1.2.0-2021e"
-maven-gradledownloadtask="5.1.0"
+maven-gradledownloadtask="5.1.1"
 gradle-kotlinter="3.11.1"
 
 [libraries]
