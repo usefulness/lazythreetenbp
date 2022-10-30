@@ -1,6 +1,7 @@
 name: TZDB version update
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 3 * * 1,4'
 
@@ -20,14 +21,14 @@ jobs:
 
       - id: current-tzdb-version
         run: |
-          echo '::set-output name=tzdb-version::$(grep "ianaVersion" "tzdb_version.properties" | cut -d'=' -f2)'
+          echo 'tzdb-version=$(grep "ianaVersion" "tzdb_version.properties" | cut -d'=' -f2)' >> $GITHUB_OUTPUT
 
       - id: latest-tzdb-version
         run: |
           wget -q https://data.iana.org/time-zones/tzdata-latest.tar.gz
           tar -xf tzdata-latest.tar.gz version
           LATEST_VERSION=$(cat version)
-          echo "::set-output name=tzdb-version::$LATEST_VERSION"
+          echo "tzdb-version=$LATEST_VERSION" >> $GITHUB_OUTPUT
           rm tzdata-latest.tar.gz
           rm version
 
@@ -37,7 +38,7 @@ jobs:
           echo "Latest versions is >>${{ steps.latest-tzdb-version.outputs.tzdb-version }}<<"
           if [ "${{ steps.current-tzdb-version.outputs.tzdb-version }}" != "${{ steps.latest-tzdb-version.outputs.tzdb-version }}" ]; 
           then 
-            echo '::set-output name=version-changed::true' 
+            echo 'version-changed=true' >> $GITHUB_OUTPUT 
           fi
 
       - uses: gradle/gradle-build-action@v2
