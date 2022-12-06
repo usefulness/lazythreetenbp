@@ -54,7 +54,7 @@ tasks.named("generateLazyZoneRules") {
 dependencies {
     tickTockCompiler libs.ticktock.compiler
     compileOnly libs.annotation.core
-    implementation("org.threeten:threetenbp:1.6.4:no-tzdb")
+    implementation("org.threeten:threetenbp:1.6.5:no-tzdb")
 
     androidTestImplementation libs.junit.core
     androidTestImplementation libs.truth.core
