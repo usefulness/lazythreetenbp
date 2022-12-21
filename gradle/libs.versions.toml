@@ -14,7 +14,7 @@ maven-compiletesting = "0.19"
 maven-kotlincompiletesting = "1.2.9"
 maven-ticktock = "1.2.0-2021e"
 maven-gradledownloadtask="5.3.0"
-gradle-kotlinter="3.12.0"
+gradle-kotlinter="3.13.0"
 
 [libraries]
 starter-gradle = { module = "com.project.starter:android", version.ref = "gradle-starter" }
