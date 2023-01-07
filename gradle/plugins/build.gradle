@@ -9,10 +9,13 @@ repositories {
     gradlePluginPortal()
 }
 
+kotlin {
+    jvmToolchain(17)
+}
+
 dependencies {
-    implementation(libs.starter.gradle)
+    implementation(libs.starter.android)
     implementation(libs.gradledownloadtask.core)
-    implementation(libs.ticktock.gradle)
 }
 
 gradlePlugin {
