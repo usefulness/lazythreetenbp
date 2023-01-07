@@ -13,7 +13,7 @@ tickTock {
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     namespace = rootProject.name
     defaultConfig {
