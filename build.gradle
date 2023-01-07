@@ -1,8 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("com.starter.config")
-    id("com.starter.versioning")
+    alias(libs.plugins.starter.config)
+    alias(libs.plugins.starter.versioning)
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.starter.library.android) apply false
 }
 
 commonConfig {
@@ -17,11 +19,9 @@ allprojects {
             languageVersion = "1.5"
         }
     }
-    pluginManager.withPlugin("java") {
-        java {
-            toolchain {
-                languageVersion = JavaLanguageVersion.of(JavaVersion.VERSION_17.toString())
-            }
+    pluginManager.withPlugin("kotlin") {
+        kotlin {
+            jvmToolchain(17)
         }
     }
 }

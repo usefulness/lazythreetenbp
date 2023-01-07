@@ -1,7 +1,7 @@
 plugins {
-    id("com.starter.library.android")
+    alias(libs.plugins.starter.library.android)
     id("com.starter.publishing")
-    id("dev.zacsweers.ticktock")
+    alias(libs.plugins.ticktock)
 }
 
 tickTock {
@@ -13,7 +13,7 @@ tickTock {
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     namespace = rootProject.name
     defaultConfig {
@@ -56,6 +56,7 @@ dependencies {
     compileOnly libs.annotation.core
     implementation("org.threeten:threetenbp:1.6.5:no-tzdb")
 
+    androidTestImplementation libs.annotation.core
     androidTestImplementation libs.junit.core
     androidTestImplementation libs.truth.core
     androidTestImplementation libs.androidtest.runner
