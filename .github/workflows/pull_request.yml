@@ -49,7 +49,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        apiVersion: [ 23, 28, 30, 31, 32 ]
+        apiVersion: [ 23, 26, 28, 29, 30, 31, 32, 33 ]
       fail-fast: false
 
     steps:
