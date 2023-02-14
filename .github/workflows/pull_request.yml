@@ -2,6 +2,7 @@ name: Build project
 
 on:
   pull_request:
+  merge_group:
 
 jobs:
   cancel-previous-workflows:
