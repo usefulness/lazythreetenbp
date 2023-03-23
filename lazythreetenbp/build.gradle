@@ -51,7 +51,7 @@ tasks.named("generateLazyZoneRules") {
     finalizedBy("writeTzdbVersion")
 }
 
-tasks.named("formatKotlin") {
+tasks.named("formatKotlinMain") {
     mustRunAfter("generateLazyZoneRules")
 }
 
