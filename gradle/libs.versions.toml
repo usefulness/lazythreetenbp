@@ -4,7 +4,7 @@ google-annotation = "1.6.0"
 google-androidtest = "1.5.2"
 google-androidtestext = "1.1.5"
 maven-kotlin = "1.8.10"
-maven-threetenbp = "1.6.5"
+maven-threetenbp = "1.6.6"
 maven-javapoet = "1.13.0"
 maven-kotlinpoet = "1.11.0"
 maven-googleoptions = "1.0.0"
@@ -14,7 +14,6 @@ maven-compiletesting = "0.19"
 maven-kotlincompiletesting = "1.2.9"
 maven-ticktock = "1.2.0-2021e"
 maven-gradledownloadtask="5.4.0"
-gradle-kotlinter="3.13.0"
 
 [libraries]
 starter-android = { module = "com.project.starter:android", version.ref = "gradle-starter" }
@@ -28,9 +27,8 @@ androidtest-junitext = { module = "androidx.test.ext:junit-ktx", version.ref = "
 gradledownloadtask-core = { module = "de.undercouch:gradle-download-task", version.ref = "maven-gradledownloadtask" }
 
 [plugins]
-jmailen-kotlinter = { id = "org.jmailen.kotlinter", version.ref = "gradle-kotlinter" }
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "maven-kotlin" }
 starter-library-android = { id = "com.starter.library.android", version.ref = "gradle-starter" }
+starter-library-kotlin = { id = "com.starter.library.kotlin", version.ref = "gradle-starter" }
 starter-config = { id = "com.starter.config", version.ref = "gradle-starter" }
 starter-versioning = { id = "com.starter.versioning", version.ref = "gradle-starter" }
 ticktock = { id = "dev.zacsweers.ticktock", version.ref = "maven-ticktock" }
