@@ -51,10 +51,14 @@ tasks.named("generateLazyZoneRules") {
     finalizedBy("writeTzdbVersion")
 }
 
+tasks.named("formatKotlin") {
+    mustRunAfter("generateLazyZoneRules")
+}
+
 dependencies {
     tickTockCompiler libs.ticktock.compiler
     compileOnly libs.annotation.core
-    implementation("org.threeten:threetenbp:1.6.5:no-tzdb")
+    implementation("org.threeten:threetenbp:1.6.6:no-tzdb")
 
     androidTestImplementation libs.annotation.core
     androidTestImplementation libs.junit.core
