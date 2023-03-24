@@ -58,7 +58,7 @@ tasks.named("formatKotlinMain") {
 dependencies {
     tickTockCompiler libs.ticktock.compiler
     compileOnly libs.annotation.core
-    implementation("org.threeten:threetenbp:1.6.6:no-tzdb")
+    implementation("org.threeten:threetenbp:1.6.7:no-tzdb")
 
     androidTestImplementation libs.annotation.core
     androidTestImplementation libs.junit.core
