@@ -51,7 +51,7 @@ jobs:
 
       - name: Create Pull Request
         if: steps.should-run.outputs.version-changed
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.PUBLIC_REPO_TOKEN }}
           commit-message: "Update TZDB to ${{ steps.latest-tzdb-version.outputs.tzdb-version }}"
