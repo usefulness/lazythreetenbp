@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: 17
+          java-version: 20
 
       - uses: gradle/gradle-build-action@v2
 
@@ -38,6 +38,10 @@ jobs:
       - run: ./gradlew projectCoverage
 
       - run: ./gradlew projectLint
+
+      - run: ./gradlew publishToMavenLocal
+
+      - run: git diff --exit-code
 
       - uses: actions/upload-artifact@v3
         if: ${{ always() }}
@@ -61,7 +65,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: 17
+          java-version: 20
 
       - uses: gradle/gradle-build-action@v2
 
