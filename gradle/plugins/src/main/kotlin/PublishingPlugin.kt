@@ -1,7 +1,4 @@
-@file:Suppress("DEPRECATION") // https://issuetracker.google.com/issues/170650362
-
-import com.android.build.gradle.BaseExtension
-import com.android.build.gradle.api.AndroidSourceDirectorySet
+import com.android.build.api.variant.AndroidComponentsExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionContainer
@@ -14,14 +11,10 @@ class PublishingPlugin : Plugin<Project> {
 
     override fun apply(target: Project) = with(target) {
         pluginManager.apply("maven-publish")
-        pluginManager.apply("signing")
-
-        tasks.register("androidSourcesJar", Jar::class.java) { jar ->
-            jar.archiveClassifier.set("sources")
-            val android = extensions.findByName("android") as BaseExtension
-            jar.from(android.sourceSets.getByName("main").java.srcDirs)
-            jar.from((android.sourceSets.getByName("main").kotlin as AndroidSourceDirectorySet).srcDirs)
+        if (findConfig("SIGNING_PASSWORD").isNotEmpty()) {
+            pluginManager.apply("signing")
         }
+
         extensions.configure<PublishingExtension> {
             with(repositories) {
                 maven { maven ->
@@ -42,47 +35,65 @@ class PublishingPlugin : Plugin<Project> {
                     }
                 }
             }
-            afterEvaluate {
-                with(publications) {
-                    register("release", MavenPublication::class.java) { publication ->
-                        publication.from(components.getByName("release"))
-                        publication.artifacts.artifact(tasks.getByName("androidSourcesJar"))
-                        publication.pom { pom ->
-                            pom.name.set("${project.group}:${project.name}")
-                            pom.description.set("ThreeTenBp Lazy Zone Provider")
-                            pom.url.set("https://github.com/usefulness/lazythreetenbp")
-                            pom.licenses { licenses ->
-                                licenses.license { license ->
-                                    license.name.set("MIT")
-                                    license.url.set("https://github.com/usefulness/lazythreetenbp/blob/master/LICENSE.txt")
+        }
+
+        pluginManager.withPlugin("signing") {
+            with(extensions.extraProperties) {
+                set("signing.keyId", findConfig("SIGNING_KEY_ID"))
+                set("signing.password", findConfig("SIGNING_PASSWORD"))
+                set("signing.secretKeyRingFile", findConfig("SIGNING_SECRET_KEY_RING_FILE"))
+            }
+
+            extensions.configure<SigningExtension>("signing") { signing ->
+                signing.sign(extensions.getByType(PublishingExtension::class.java).publications)
+            }
+        }
+
+        pluginManager.withPlugin("com.android.library") {
+            val androidSourcesJar = tasks.register("androidSourcesJar", Jar::class.java) { jar ->
+                jar.archiveClassifier.set("sources")
+            }
+
+            val androidComponents = extensions.findByName("androidComponents") as AndroidComponentsExtension<*, *, *>
+            androidComponents.onVariants(androidComponents.selector().withBuildType("release")) { variant ->
+                androidSourcesJar.configure { jar ->
+                    variant.sources.kotlin?.all?.let { jar.from(it) }
+                    variant.sources.java?.all?.let { jar.from(it) }
+                }
+            }
+
+            extensions.configure<PublishingExtension> {
+                afterEvaluate {
+                    with(publications) {
+                        register("release", MavenPublication::class.java) { publication ->
+                            publication.from(components.getByName("release"))
+                            publication.artifacts.artifact(tasks.getByName("androidSourcesJar"))
+                            publication.pom { pom ->
+                                pom.name.set("${project.group}:${project.name}")
+                                pom.description.set("ThreeTenBp Lazy Zone Provider")
+                                pom.url.set("https://github.com/usefulness/lazythreetenbp")
+                                pom.licenses { licenses ->
+                                    licenses.license { license ->
+                                        license.name.set("MIT")
+                                        license.url.set("https://github.com/usefulness/lazythreetenbp/blob/master/LICENSE.txt")
+                                    }
                                 }
-                            }
-                            pom.developers { developers ->
-                                developers.developer { developer ->
-                                    developer.id.set("mateuszkwiecinski")
-                                    developer.name.set("Mateusz Kwiecinski")
-                                    developer.email.set("36954793+mateuszkwiecinski@users.noreply.github.com")
+                                pom.developers { developers ->
+                                    developers.developer { developer ->
+                                        developer.id.set("mateuszkwiecinski")
+                                        developer.name.set("Mateusz Kwiecinski")
+                                        developer.email.set("36954793+mateuszkwiecinski@users.noreply.github.com")
+                                    }
                                 }
-                            }
-                            pom.scm { scm ->
-                                scm.connection.set("scm:git:github.com/usefulness/lazythreetenbplazythreetenbp.git")
-                                scm.developerConnection.set("scm:git:ssh://github.com/usefulness/lazythreetenbp.git")
-                                scm.url.set("https://github.com/usefulness/lazythreetenbp/tree/master")
+                                pom.scm { scm ->
+                                    scm.connection.set("scm:git:github.com/usefulness/lazythreetenbplazythreetenbp.git")
+                                    scm.developerConnection.set("scm:git:ssh://github.com/usefulness/lazythreetenbp.git")
+                                    scm.url.set("https://github.com/usefulness/lazythreetenbp/tree/master")
+                                }
                             }
                         }
                     }
                 }
-            }
-        }
-        with(extensions.extraProperties) {
-            set("signing.keyId", findConfig("SIGNING_KEY_ID"))
-            set("signing.password", findConfig("SIGNING_PASSWORD"))
-            set("signing.secretKeyRingFile", findConfig("SIGNING_SECRET_KEY_RING_FILE"))
-        }
-
-        extensions.configure<SigningExtension>("signing") { signing ->
-            if (findConfig("SIGNING_PASSWORD").isNotEmpty()) {
-                signing.sign(extensions.getByType(PublishingExtension::class.java).publications)
             }
         }
     }

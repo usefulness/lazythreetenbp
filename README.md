@@ -1,6 +1,6 @@
 # LazyThreeTenBp
 
-[![Build Status](https://github.com/usefulness/lazythreetenbp/workflows/After%20merge%20build/badge.svg)](https://github.com/usefulness/lazythreetenbp/actions)
+[![Build project](https://github.com/usefulness/lazythreetenbp/actions/workflows/default.yml/badge.svg?branch=master)](https://github.com/usefulness/lazythreetenbp/actions/workflows/default.yml)
 ![Maven Central](https://img.shields.io/maven-central/v/com.github.usefulness/lazythreetenbp)
 
 
