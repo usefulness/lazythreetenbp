@@ -37,12 +37,14 @@ jobs:
 
       - id: dependency-diff
         name: Generate dependency diff
+        if: github.event_name == 'pull_request'
         uses: usefulness/dependency-tree-diff-action@v1
         with:
           project: 'lazythreetenbp'
           configuration: releaseRuntimeClasspath
 
       - uses: peter-evans/find-comment@v2
+        if: github.event_name == 'pull_request'
         id: find_comment
         with:
           issue-number: ${{ github.event.pull_request.number }}
