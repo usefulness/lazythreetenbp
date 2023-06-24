@@ -2,10 +2,11 @@ plugins {
     alias(libs.plugins.starter.library.android)
     id("com.starter.publishing")
     alias(libs.plugins.ticktock)
+    alias(libs.plugins.kotlinx.binarycompatibility)
 }
 
 tickTock {
-    tzVersion.set(provider { project.getProperty("lazythreetenbp.tzdbVersion") })
+    tzVersion.set(providers.gradleProperty("lazythreetenbp.tzdbVersion"))
     codeOutputDir.set(layout.projectDirectory.dir("src/main/kotlin"))
     tzOutputDir.set(layout.projectDirectory.dir("src/main/assets"))
     packageName.set("com.usefulness.threetenbp")
@@ -31,19 +32,17 @@ android {
         warningsAsErrors true
         checkReleaseBuilds false
     }
-    androidComponents {
-        beforeVariants(selector().withBuildType("release")) { builder ->
-            builder.enable = true
-        }
+}
+
+androidComponents {
+    beforeVariants(selector().withBuildType("release")) { builder ->
+        builder.enable = true
     }
 }
 
-tasks.register("writeTzdbVersion") {
-    def target = rootProject.file("tzdb_version.properties")
-    doLast {
-        def updatedVersion = tickTock.tzVersion.get()
-        target.text = "ianaVersion=$updatedVersion\n"
-    }
+tasks.register("writeTzdbVersion", WriteProperties) {
+    it.destinationFile = rootProject.file("tzdb_version.properties")
+    it.property("ianaVersion", tickTock.tzVersion)
 }
 
 tasks.named("generateLazyZoneRules") {
@@ -51,7 +50,7 @@ tasks.named("generateLazyZoneRules") {
     finalizedBy("writeTzdbVersion")
 }
 
-tasks.named("formatKotlinMain") {
+tasks.matching { it.name == "formatKotlinMain" }.configureEach {
     mustRunAfter("generateLazyZoneRules")
 }
 
