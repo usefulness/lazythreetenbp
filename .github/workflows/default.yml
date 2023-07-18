@@ -51,7 +51,7 @@ jobs:
           path: '${{ github.workspace }}/**/build/**/reports/lint-results-*.html'
 
       - name: Unwrap GPG key
-        if: github.repository == 'usefulness/lazythreetenbp' && github.event_name == 'push'
+        if: github.repository == 'usefulness/lazythreetenbp' && github.event_name != 'pull_request'
         env:
           GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
           SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
@@ -69,14 +69,14 @@ jobs:
         run: ./gradlew publishReleasePublicationToGithubRepository | true
 
       - uses: actions/cache@v3
-        if: github.event_name == 'push'
+        if: github.event_name != 'pull_request'
         name: Upload base (release)
         with:
           path: diffuse-source-file-release
           key: diffuse-${{ github.sha }}-${{ hashFiles('**/aar/**.aar') }}
 
       - run: cp lazythreetenbp/build/outputs/aar/lazythreetenbp-release.aar diffuse-source-file-release
-        if: github.event_name == 'push'
+        if: github.event_name != 'pull_request'
         shell: bash
 
   ui-test:
