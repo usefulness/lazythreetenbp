@@ -28,7 +28,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: 20
+          java-version: 21
 
       - uses: gradle/gradle-build-action@v2
 
@@ -83,7 +83,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        apiVersion: [ 23, 28, 30, 31, 33 ]
+        apiVersion: [ 23, 28, 30, 31, 34 ]
       fail-fast: false
 
     steps:
@@ -94,7 +94,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: 20
+          java-version: 21
 
       - uses: gradle/gradle-build-action@v2
 
