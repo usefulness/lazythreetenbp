@@ -44,7 +44,7 @@ jobs:
 
       - run: git diff --exit-code
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: ${{ always() }}
         with:
           name: lint-results
@@ -109,7 +109,7 @@ jobs:
           script: ./gradlew connectedCheck
 
       - name: Upload tests result
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "test-results [${{ matrix.apiVersion }}]"
           path: "${{ github.workspace }}/**/reports/**"
