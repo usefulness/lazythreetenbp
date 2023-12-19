@@ -6,7 +6,7 @@ google-androidtest = "1.5.2"
 google-androidtestext = "1.1.5"
 maven-threetenbp = "1.6.8"
 maven-junit = "4.13.2"
-maven-truth = "1.1.5"
+maven-truth = "1.2.0"
 maven-ticktock = "1.2.0-2021e"
 maven-binarycompatiblity = "0.13.2"
 
