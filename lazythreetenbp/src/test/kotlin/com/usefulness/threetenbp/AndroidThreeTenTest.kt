@@ -1,13 +1,15 @@
 package com.usefulness.threetenbp
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 import org.threeten.bp.zone.ZoneRulesProvider
 
-@RunWith(AndroidJUnit4::class)
+@Config(sdk = [23, 28, 30, 31, 34])
+@RunWith(RobolectricTestRunner::class)
 internal class AndroidThreeTenTest {
 
     private val context = InstrumentationRegistry.getInstrumentation().context

@@ -14,8 +14,8 @@ commonConfig {
 allprojects {
     tasks.withType(KotlinCompile).configureEach {
         compilerOptions {
-            apiVersion = KotlinVersion.KOTLIN_1_5
-            languageVersion = KotlinVersion.KOTLIN_1_5
+            apiVersion = KotlinVersion.KOTLIN_1_6
+            languageVersion = KotlinVersion.KOTLIN_1_6
         }
     }
     pluginManager.withPlugin("kotlin") {

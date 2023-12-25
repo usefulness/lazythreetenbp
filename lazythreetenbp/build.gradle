@@ -33,6 +33,11 @@ android {
         checkReleaseBuilds false
         disable += "UseTomlInstead"
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 androidComponents {
@@ -61,9 +66,7 @@ dependencies {
     // noinspection UseTomlInstead
     implementation("org.threeten:threetenbp:1.6.8:no-tzdb")
 
-    androidTestImplementation libs.annotation.core
-    androidTestImplementation libs.junit.core
-    androidTestImplementation libs.truth.core
-    androidTestImplementation libs.androidtest.runner
-    androidTestImplementation libs.androidtest.junitext
+    testImplementation libs.junit.core
+    testImplementation libs.robolectric.core
+    testImplementation libs.truth.core
 }
