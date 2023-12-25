@@ -1,14 +1,13 @@
 [versions]
-gradle-starter = "0.67.0"
+gradle-starter = "0.68.0"
 gradle-doctor = "0.9.1"
 google-annotation = "1.7.1"
-google-androidtest = "1.5.2"
-google-androidtestext = "1.1.5"
 maven-threetenbp = "1.6.8"
 maven-junit = "4.13.2"
 maven-truth = "1.2.0"
 maven-ticktock = "1.2.0-2021e"
 maven-binarycompatiblity = "0.13.2"
+maven-robolectric = "4.11.1"
 
 [libraries]
 starter-android = { module = "com.project.starter:android", version.ref = "gradle-starter" }
@@ -16,9 +15,8 @@ ticktock-compiler = { module = "dev.zacsweers.ticktock:ticktock-compiler", versi
 annotation-core = { module = "androidx.annotation:annotation", version.ref = "google-annotation" }
 threetenbp-core = { module = "org.threeten:threetenbp", version.ref = "maven-threetenbp" }
 junit-core = { module = "junit:junit", version.ref = "maven-junit" }
+robolectric-core = { module = "org.robolectric:robolectric", version.ref = "maven-robolectric" }
 truth-core = { module = "com.google.truth:truth", version.ref = "maven-truth" }
-androidtest-runner = { module = "androidx.test:runner", version.ref = "google-androidtest" }
-androidtest-junitext = { module = "androidx.test.ext:junit-ktx", version.ref = "google-androidtestext" }
 
 [plugins]
 starter-library-android = { id = "com.starter.library.android", version.ref = "gradle-starter" }
