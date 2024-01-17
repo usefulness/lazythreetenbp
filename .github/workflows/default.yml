@@ -68,7 +68,7 @@ jobs:
           SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
         run: ./gradlew publishReleasePublicationToGithubRepository | true
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         if: github.event_name != 'pull_request'
         name: Upload base (release)
         with:
