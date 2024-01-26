@@ -38,7 +38,7 @@ jobs:
       - id: dependency-diff
         name: Generate dependency diff
         if: github.event_name == 'pull_request'
-        uses: usefulness/dependency-tree-diff-action@v1
+        uses: usefulness/dependency-tree-diff-action@v2
         with:
           project: 'lazythreetenbp'
           configuration: releaseRuntimeClasspath
