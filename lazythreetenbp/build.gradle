@@ -14,8 +14,6 @@ tickTock {
 }
 
 android {
-    compileSdk 33
-
     namespace = rootProject.name
     defaultConfig {
         minSdk 23

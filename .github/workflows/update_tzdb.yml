@@ -40,7 +40,7 @@ jobs:
             echo 'version-changed=true' >> $GITHUB_OUTPUT 
           fi
 
-      - uses: gradle/gradle-build-action@v3
+      - uses: gradle/actions/setup-gradle@v3
         if: steps.should-run.outputs.version-changed
 
       - run: ./gradlew generateLazyZoneRules -Plazythreetenbp.tzdbVersion=${{ steps.latest-tzdb-version.outputs.tzdb-version }}
