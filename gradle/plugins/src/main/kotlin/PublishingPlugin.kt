@@ -86,7 +86,7 @@ class PublishingPlugin : Plugin<Project> {
                                     }
                                 }
                                 pom.scm { scm ->
-                                    scm.connection.set("scm:git:github.com/usefulness/lazythreetenbplazythreetenbp.git")
+                                    scm.connection.set("scm:git:github.com/usefulness/lazythreetenbp.git")
                                     scm.developerConnection.set("scm:git:ssh://github.com/usefulness/lazythreetenbp.git")
                                     scm.url.set("https://github.com/usefulness/lazythreetenbp/tree/master")
                                 }
