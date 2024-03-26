@@ -62,7 +62,7 @@ dependencies {
     tickTockCompiler libs.ticktock.compiler
     compileOnly libs.annotation.core
     // noinspection UseTomlInstead
-    implementation("org.threeten:threetenbp:1.6.8:no-tzdb")
+    implementation("org.threeten:threetenbp:1.6.9:no-tzdb")
 
     testImplementation libs.junit.core
     testImplementation libs.robolectric.core
