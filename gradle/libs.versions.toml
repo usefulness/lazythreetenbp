@@ -7,7 +7,7 @@ maven-junit = "4.13.2"
 maven-truth = "1.4.2"
 maven-ticktock = "1.2.0-2021e"
 maven-binarycompatiblity = "0.14.0"
-maven-robolectric = "4.12"
+maven-robolectric = "4.12.1"
 
 [libraries]
 starter-android = { module = "com.project.starter:android", version.ref = "gradle-starter" }
