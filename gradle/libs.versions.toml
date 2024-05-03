@@ -1,6 +1,6 @@
 [versions]
 gradle-starter = "0.72.0"
-gradle-doctor = "0.9.2"
+gradle-doctor = "0.10.0"
 google-annotation = "1.7.1"
 maven-threetenbp = "1.6.9"
 maven-junit = "4.13.2"
