@@ -1,7 +1,6 @@
 package com.usefulness.threetenbp
 
 import android.content.res.AssetManager
-import org.threeten.bp.jdk8.Jdk8Methods
 import org.threeten.bp.zone.ZoneRules
 import org.threeten.bp.zone.ZoneRulesCompat
 import org.threeten.bp.zone.ZoneRulesException
@@ -20,7 +19,6 @@ internal class LazyZoneRulesProvider(private val assets: AssetManager) : ZoneRul
     override fun provideZoneIds() = GeneratedZoneIdsProvider.getZoneIds().toHashSet()
 
     override fun provideRules(zoneId: String, forCaching: Boolean): ZoneRules {
-        Jdk8Methods.requireNonNull(zoneId, "zoneId")
         var rules = map[zoneId]
         if (rules == null) {
             rules = loadData(zoneId)
