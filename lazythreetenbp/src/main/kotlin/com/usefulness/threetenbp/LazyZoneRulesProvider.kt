@@ -1,6 +1,6 @@
 package com.usefulness.threetenbp
 
-import android.content.Context
+import android.content.res.AssetManager
 import org.threeten.bp.jdk8.Jdk8Methods
 import org.threeten.bp.zone.ZoneRules
 import org.threeten.bp.zone.ZoneRulesCompat
@@ -13,7 +13,7 @@ import java.util.NavigableMap
 import java.util.TreeMap
 import java.util.concurrent.ConcurrentSkipListMap
 
-internal class LazyZoneRulesProvider(private val context: Context) : ZoneRulesProvider() {
+internal class LazyZoneRulesProvider(private val assets: AssetManager) : ZoneRulesProvider() {
 
     private val map = ConcurrentSkipListMap<String, ZoneRules?>()
 
@@ -39,7 +39,7 @@ internal class LazyZoneRulesProvider(private val context: Context) : ZoneRulesPr
     private fun loadData(zoneId: String): ZoneRules {
         val fileName = "tzdb/$zoneId.dat"
 
-        return runCatching { context.assets.open(fileName).use(::loadData) }
+        return runCatching { assets.open(fileName).use(::loadData) }
             .getOrElse { throw ZoneRulesException("Invalid binary time-zone data: $fileName", it) }
     }
 
