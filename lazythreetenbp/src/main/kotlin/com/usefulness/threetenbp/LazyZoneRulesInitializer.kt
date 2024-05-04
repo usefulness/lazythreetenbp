@@ -1,12 +1,12 @@
 package com.usefulness.threetenbp
 
-import android.app.Application
+import android.content.Context
 import org.threeten.bp.zone.ZoneRulesInitializer
 import org.threeten.bp.zone.ZoneRulesProvider
 
-internal class LazyZoneRulesInitializer(private val application: Application) : ZoneRulesInitializer() {
+internal class LazyZoneRulesInitializer(private val context: Context) : ZoneRulesInitializer() {
 
     override fun initializeProviders() {
-        ZoneRulesProvider.registerProvider(LazyZoneRulesProvider(application))
+        ZoneRulesProvider.registerProvider(LazyZoneRulesProvider(context.assets))
     }
 }

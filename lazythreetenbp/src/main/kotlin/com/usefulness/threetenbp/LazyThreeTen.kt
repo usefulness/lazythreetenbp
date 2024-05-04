@@ -1,11 +1,10 @@
 package com.usefulness.threetenbp
 
-import android.app.Application
 import android.content.Context
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
-import org.threeten.bp.zone.ZoneRulesInitializer
 import org.threeten.bp.ZoneId
+import org.threeten.bp.zone.ZoneRulesInitializer
 import org.threeten.bp.zone.ZoneRulesProvider
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -22,7 +21,7 @@ public object LazyThreeTen {
         if (INITIALIZED.getAndSet(true)) {
             return
         }
-        ZoneRulesInitializer.setInitializer(LazyZoneRulesInitializer((context.applicationContext as Application)))
+        ZoneRulesInitializer.setInitializer(LazyZoneRulesInitializer(context.applicationContext))
     }
 
     /**
