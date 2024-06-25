@@ -8,5 +8,8 @@ gradlew.bat
 build/
 local.properties
 
+# Kotlin
+.kotlin
+
 # OS X
 .DS_Store
