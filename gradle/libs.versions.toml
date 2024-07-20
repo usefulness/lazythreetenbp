@@ -6,7 +6,7 @@ maven-threetenbp = "1.6.9"
 maven-junit = "4.13.2"
 maven-truth = "1.4.4"
 maven-ticktock = "1.2.0-2021e"
-maven-binarycompatiblity = "0.16.0"
+maven-binarycompatiblity = "0.16.2"
 maven-robolectric = "4.13"
 
 [libraries]
