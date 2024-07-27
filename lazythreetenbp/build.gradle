@@ -30,6 +30,7 @@ android {
         warningsAsErrors true
         checkReleaseBuilds false
         disable += "UseTomlInstead"
+        disable += "GradleDependency"
     }
     testOptions {
         unitTests {
