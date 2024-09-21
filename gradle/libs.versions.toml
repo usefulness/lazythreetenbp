@@ -2,7 +2,7 @@
 gradle-starter = "0.77.0"
 gradle-doctor = "0.10.0"
 google-annotation = "1.8.2"
-maven-threetenbp = "1.6.9"
+maven-threetenbp = "1.7.0"
 maven-junit = "4.13.2"
 maven-truth = "1.4.4"
 maven-ticktock = "1.2.0-2021e"
