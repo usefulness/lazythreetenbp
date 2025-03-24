@@ -5,7 +5,7 @@ import kotlin.String
 import kotlin.collections.Collection
 
 internal object GeneratedZoneIdsProvider : ZoneIdsProvider {
-    private const val VERSION_ID: String = "2025a"
+    private const val VERSION_ID: String = "2025b"
 
     private val ZONE_IDS: Collection<String> = setOf(
         "Africa/Abidjan",
@@ -107,6 +107,7 @@ internal object GeneratedZoneIdsProvider : ZoneIdsProvider {
         "America/Coral_Harbour",
         "America/Cordoba",
         "America/Costa_Rica",
+        "America/Coyhaique",
         "America/Creston",
         "America/Cuiaba",
         "America/Curacao",
