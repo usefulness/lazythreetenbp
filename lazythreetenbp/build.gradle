@@ -16,26 +16,24 @@ tickTock {
 android {
     namespace = rootProject.name
     defaultConfig {
-        minSdk 23
+        minSdk = 23
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    publishing {
-        singleVariant("release")
-    }
-    kotlinOptions {
-        freeCompilerArgs += '-Xexplicit-api=strict'
-    }
     lint {
-        warningsAsErrors true
-        checkReleaseBuilds false
-        disable += "UseTomlInstead"
-        disable += "GradleDependency"
+        warningsAsErrors = true
+        checkReleaseBuilds = false
     }
     testOptions {
         unitTests {
             includeAndroidResources = true
         }
+    }
+}
+
+kotlin {
+    compilerOptions {
+        explicitApi()
     }
 }
 

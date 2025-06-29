@@ -8,6 +8,8 @@ maven-truth = "1.4.4"
 maven-ticktock = "1.2.0-2021e"
 maven-binarycompatiblity = "0.18.0"
 maven-robolectric = "4.15.1"
+maven-dokka = "2.0.0"
+maven-vanniktech-maven-publish = "0.33.0"
 
 [libraries]
 starter-android = { module = "com.project.starter:android", version.ref = "gradle-starter" }
@@ -17,6 +19,8 @@ threetenbp-core = { module = "org.threeten:threetenbp", version.ref = "maven-thr
 junit-core = { module = "junit:junit", version.ref = "maven-junit" }
 robolectric-core = { module = "org.robolectric:robolectric", version.ref = "maven-robolectric" }
 truth-core = { module = "com.google.truth:truth", version.ref = "maven-truth" }
+jetbrains-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "maven-dokka" }
+vanniktech-maven-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "maven-vanniktech-maven-publish" }
 
 [plugins]
 starter-library-android = { id = "com.starter.library.android", version.ref = "gradle-starter" }
