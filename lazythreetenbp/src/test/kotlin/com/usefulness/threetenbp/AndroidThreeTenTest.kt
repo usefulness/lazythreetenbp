@@ -8,7 +8,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.threeten.bp.zone.ZoneRulesProvider
 
-@Config(sdk = [23, 28, 30, 31, 34])
+@Config(sdk = [23, 28, 30, 31, 35])
 @RunWith(RobolectricTestRunner::class)
 internal class AndroidThreeTenTest {
 

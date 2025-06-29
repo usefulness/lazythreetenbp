@@ -6,20 +6,8 @@ plugins {
     alias(libs.plugins.osacky.doctor)
 }
 
-dependencies {
-    implementation(libs.starter.android)
-}
-
 kotlin {
-    jvmToolchain(20)
-}
-
-def targetJavaVersion = JavaVersion.VERSION_17
-tasks.withType(JavaCompile).configureEach {
-    options.release.set(targetJavaVersion.majorVersion.toInteger())
-}
-tasks.withType(KotlinCompile).configureEach {
-    kotlinOptions.jvmTarget = targetJavaVersion
+    jvmToolchain(24)
 }
 
 gradlePlugin {
@@ -29,4 +17,10 @@ gradlePlugin {
             implementationClass = 'PublishingPlugin'
         }
     }
+}
+
+dependencies {
+    implementation(libs.starter.android)
+    implementation(libs.vanniktech.maven.publish)
+    implementation(libs.jetbrains.dokka)
 }
