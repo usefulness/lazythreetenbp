@@ -23,6 +23,7 @@ android {
     lint {
         warningsAsErrors = true
         checkReleaseBuilds = false
+        disable("NewerVersionAvailable")
     }
     testOptions {
         unitTests {
