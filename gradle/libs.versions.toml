@@ -8,7 +8,7 @@ maven-truth = "1.4.5"
 maven-ticktock = "1.2.0-2021e"
 maven-binarycompatiblity = "0.18.1"
 maven-robolectric = "4.16"
-maven-dokka = "2.0.0"
+maven-dokka = "2.1.0"
 maven-vanniktech-maven-publish = "0.34.0"
 
 [libraries]
