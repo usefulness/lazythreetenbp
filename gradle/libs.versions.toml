@@ -9,7 +9,7 @@ maven-ticktock = "1.2.0-2021e"
 maven-binarycompatiblity = "0.18.1"
 maven-robolectric = "4.16"
 maven-dokka = "2.1.0"
-maven-vanniktech-maven-publish = "0.34.0"
+maven-vanniktech-maven-publish = "0.35.0"
 
 [libraries]
 starter-android = { module = "com.project.starter:android", version.ref = "gradle-starter" }
