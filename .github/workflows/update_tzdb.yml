@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
-          java-version: 24
+          java-version-file: .java-version
 
       - id: current-tzdb-version
         run: |

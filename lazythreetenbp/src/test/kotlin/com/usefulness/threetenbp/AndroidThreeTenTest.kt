@@ -6,9 +6,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.Config.NEWEST_SDK
 import org.threeten.bp.zone.ZoneRulesProvider
 
-@Config(sdk = [23, 28, 30, 31, 35])
+@Config(sdk = [23, 28, 30, 31, 35, NEWEST_SDK])
 @RunWith(RobolectricTestRunner::class)
 internal class AndroidThreeTenTest {
 
