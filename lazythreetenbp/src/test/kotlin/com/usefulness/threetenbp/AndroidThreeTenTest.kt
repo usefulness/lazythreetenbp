@@ -9,7 +9,8 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.Config.NEWEST_SDK
 import org.threeten.bp.zone.ZoneRulesProvider
 
-@Config(sdk = [23, 28, 30, 31, 35, NEWEST_SDK])
+// Robolectric 4.18+ supports SDK 24 and above, so the library's minSdk (23) can't be tested here
+@Config(sdk = [24, 28, 30, 31, 35, NEWEST_SDK])
 @RunWith(RobolectricTestRunner::class)
 internal class AndroidThreeTenTest {
 
