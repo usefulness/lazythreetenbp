@@ -59,6 +59,10 @@ androidComponents {
     }
 }
 
+configurations.named("tickTockCompiler") {
+    canBeConsumed = false
+}
+
 tasks.register("writeTzdbVersion", WriteProperties) {
     it.destinationFile = rootProject.file("tzdb_version.properties")
     it.property("ianaVersion", tickTock.tzVersion)
