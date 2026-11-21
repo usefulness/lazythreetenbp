@@ -32,6 +32,6 @@ jobs:
 
       - run: ./gradlew currentVersion
 
-      - run: ./gradlew publishAllPublicationsToMavenCentralRepository --no-configuration-cache
+      - run: ./gradlew publishAllPublicationsToMavenCentralRepository
 
-      - run: ./gradlew publishAllPublicationsToGithubRepository --no-configuration-cache
+      - run: ./gradlew publishAllPublicationsToGithubRepository

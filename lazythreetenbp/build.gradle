@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.starter.library.android)
     id("com.starter.publishing")
@@ -14,7 +17,7 @@ tickTock {
 }
 
 android {
-    namespace = rootProject.name
+    namespace = isolated.rootProject.name
     defaultConfig {
         minSdk = 23
 
@@ -59,12 +62,19 @@ androidComponents {
     }
 }
 
+tasks.withType(KotlinCompile).configureEach {
+    compilerOptions {
+        apiVersion = KotlinVersion.KOTLIN_2_2
+        languageVersion = KotlinVersion.KOTLIN_2_2
+    }
+}
+
 configurations.named("tickTockCompiler") {
     canBeConsumed = false
 }
 
 tasks.register("writeTzdbVersion", WriteProperties) {
-    it.destinationFile = rootProject.file("tzdb_version.properties")
+    it.destinationFile = isolated.rootProject.projectDirectory.file("tzdb_version.properties")
     it.property("ianaVersion", tickTock.tzVersion)
 }
 
